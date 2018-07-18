@@ -1,0 +1,19 @@
+.am-list-content{
+    display:flex;
+}
+
+.table_item{
+    flex:1;
+}
+.userLists{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    
+    text-align: center;
+}
+
+.userLists span{
+    flex:1;
+    text-align: center;
+}
