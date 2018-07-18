@@ -17,7 +17,7 @@ class Submit extends Component{
             money:'',
             what:'',
             userArr:[]
-          }
+        }
     }
     render(){
         let {date,money,what,userArr,visible}=this.state
