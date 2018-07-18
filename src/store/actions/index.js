@@ -1,5 +1,9 @@
 import axios from 'axios'
-const PORT='http://169.254.5.97:3333'
+let PORT=''
+if(process.env.NODE_ENV==='development'){
+    PORT='http://169.254.5.97:3333'
+}
+
 
 
 export const LOADING_SHOW='LOADING_SHOW'

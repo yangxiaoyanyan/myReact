@@ -36,9 +36,8 @@ class UserManagement extends React.Component{
                     maskClosable={false}
                     onClose={()=>{this.setState({modal1:false})}}
                     title="添加用户"
-                    footer={[{ text: '取消', onPress: () => {  this.setState({modal1:false}) } 
-                    },{ text: <WingBlank>确认</WingBlank>, onPress: ()=>{this.setState({modal1:false,modal2:true})} 
-                    }]}
+                    footer={[{ text: <WingBlank>确认</WingBlank>, onPress: ()=>{this.setState({modal1:false,modal2:true})} },{ text: '取消', onPress: () => {  this.setState({modal1:false}) } 
+                }]}
                     >
                     <List>
                         <InputItem placeholder="id" onChange={(value)=>{
@@ -58,9 +57,8 @@ class UserManagement extends React.Component{
                     maskClosable={false}
                     onClose={()=>{this.setState({modal2:false})}}
                     title="确认添加吗？"
-                    footer={[{ text: '取消', onPress: () => {  this.setState({modal2:false}) } 
-                    },{ text:'确认', onPress: this.addUser.bind(this) 
-                    }]}
+                    footer={[{ text:'确认', onPress: this.addUser.bind(this) },{ text: '取消', onPress: () => {  this.setState({modal2:false}) } 
+                }]}
                     >
                     <List>
                         <p>id:{uid}</p>
@@ -121,8 +119,8 @@ class UserManagement extends React.Component{
     }
     success(title,successFn){
         alert('提示',title , [
-            { text: '取消', onPress:successFn},
             { text: '确定', onPress:successFn},
+            { text: '取消', onPress:successFn},            
             ])
     }
     addSuccess(){

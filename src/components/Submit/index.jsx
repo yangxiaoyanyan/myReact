@@ -60,7 +60,7 @@ class Submit extends React.Component{
                     maskClosable={false}
                     onClose={()=>{this.setState({visible:false})}}
                     title="提示"
-                    footer={[{ text: '取消', onPress: () => { console.log('00');this.setState({visible:false})} },{ text: '确定', onPress: this.submitBtn.bind(this)}]}
+                    footer={[{ text: '确定', onPress: this.submitBtn.bind(this)},{ text: '取消', onPress: () => { console.log('00');this.setState({visible:false})} }]}
                     >
                     <div >
                         <p><span>日期</span>:<span>{this.getDate(date)}</span></p>
@@ -120,8 +120,8 @@ class Submit extends React.Component{
     }
     addAlert(title,addRecord){
         alert('提示', title, [
-            { text: '取消', onPress: addRecord },
             { text: '确定', onPress: addRecord },
+            { text: '取消', onPress: addRecord },
           ])
     }
     addRecord(){
