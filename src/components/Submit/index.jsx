@@ -1,6 +1,6 @@
 import React  from 'react'
 
-import Component from '../../tools/shouldComponent'
+// import Component from '../../tools/shouldComponent'
 import {connect} from 'react-redux'
 import { DatePicker, List,Picker,InputItem ,Button,WingBlank,Modal} from 'antd-mobile';
 import {getListAll,addRecord,ADD_RECORD_SUCCESS} from '../../store/actions'
@@ -8,7 +8,7 @@ const alert = Modal.alert;
 const nowTimeStamp = Date.now();
 const now = new Date(nowTimeStamp);
 
-class Submit extends Component{
+class Submit extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -31,7 +31,7 @@ class Submit extends Component{
                     title="Select Date"
                     extra="Optional"
                     value={date}
-                    onChange={Time => {this.setState({ date:Time });console.log(this.state.date)}}
+                    onChange={Time => {this.setState({ date:Time })}}
                     >
                     <List.Item arrow="horizontal">日期</List.Item>
                     </DatePicker>
