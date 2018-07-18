@@ -1,5 +1,5 @@
 import axios from 'axios'
-const PORT='http://localhost:3333'
+const PORT='http://169.254.5.97:3333'
 
 
 export const LOADING_SHOW='LOADING_SHOW'

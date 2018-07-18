@@ -2,12 +2,13 @@ import React  from 'react'
 import Component from '../../tools/shouldComponent'
 import { NavBar, Icon ,List, Modal, WingBlank,InputItem} from 'antd-mobile';
 import './index.css'
+import Scroll from 'react-bscroll'
 import {connect} from 'react-redux'
 import {getListAll,deleteUser,DELETE_USER_SUCCESS,addUser,CHANGE_ADD_SUCCESS,changeUser,CHNAGE_USER_SUCCESS} from '../../store/actions'
 let Item = List.Item;
 const alert = Modal.alert;
 const prompt=Modal.prompt;
-class UserManagement extends Component{
+class UserManagement extends React.Component{
     constructor(props){
         super(props);
         this.state={
@@ -21,78 +22,81 @@ class UserManagement extends Component{
     render(){
         let {userList}=this.props;
         let {uid,user,money,modal1,modal2}=this.state
-        return <div className="userManagement">
-            <NavBar
-            icon={<Icon type="left" />}
-            onLeftClick={() => {this.props.history.go(-1)}}
-            rightContent={
-                <WingBlank>
-                    <Icon type="ellipsis" onClick={()=>{this.setState({modal1:true})}}/>
-                <Modal
-                visible={modal1}
-                transparent
-                maskClosable={false}
-                onClose={()=>{this.setState({modal1:false})}}
-                title="添加用户"
-                footer={[{ text: '取消', onPress: () => {  this.setState({modal1:false}) } 
-                },{ text: <WingBlank>确认</WingBlank>, onPress: ()=>{this.setState({modal1:false,modal2:true})} 
-                }]}
-                >
+        return <Scroll  click={true}>
+            <div className="userManagement">
+                <NavBar
+                icon={<Icon type="left" />}
+                onLeftClick={() => {this.props.history.go(-1)}}
+                rightContent={
+                    <WingBlank>
+                        <Icon type="ellipsis" onClick={()=>{this.setState({modal1:true})}}/>
+                    <Modal
+                    visible={modal1}
+                    transparent
+                    maskClosable={false}
+                    onClose={()=>{this.setState({modal1:false})}}
+                    title="添加用户"
+                    footer={[{ text: '取消', onPress: () => {  this.setState({modal1:false}) } 
+                    },{ text: <WingBlank>确认</WingBlank>, onPress: ()=>{this.setState({modal1:false,modal2:true})} 
+                    }]}
+                    >
+                    <List>
+                        <InputItem placeholder="id" onChange={(value)=>{
+                            this.setState({uid:value})
+                        }}></InputItem>
+                        <InputItem placeholder="user"  onChange={(value)=>{
+                            this.setState({user:value})
+                        }}></InputItem>
+                        <InputItem placeholder="money"  onChange={(value)=>{
+                            this.setState({money:value})
+                        }}></InputItem>
+                    </List>
+                    </Modal>
+                    <Modal
+                    visible={modal2}
+                    transparent
+                    maskClosable={false}
+                    onClose={()=>{this.setState({modal2:false})}}
+                    title="确认添加吗？"
+                    footer={[{ text: '取消', onPress: () => {  this.setState({modal2:false}) } 
+                    },{ text:'确认', onPress: this.addUser.bind(this) 
+                    }]}
+                    >
+                    <List>
+                        <p>id:{uid}</p>
+                        <p>user:{user}</p>
+                        <p>money:{money}</p>
+                    </List>
+                    </Modal>
+                    </WingBlank>
+                }
+                >用户管理</NavBar>
                 <List>
-                    <InputItem placeholder="id" onChange={(value)=>{
-                        this.setState({uid:value})
-                    }}></InputItem>
-                    <InputItem placeholder="user"  onChange={(value)=>{
-                        this.setState({user:value})
-                    }}></InputItem>
-                    <InputItem placeholder="money"  onChange={(value)=>{
-                        this.setState({money:value})
-                    }}></InputItem>
-                </List>
-                </Modal>
-                <Modal
-                visible={modal2}
-                transparent
-                maskClosable={false}
-                onClose={()=>{this.setState({modal2:false})}}
-                title="确认添加吗？"
-                footer={[{ text: '取消', onPress: () => {  this.setState({modal2:false}) } 
-                },{ text:'确认', onPress: this.addUser.bind(this) 
-                }]}
-                >
-                <List>
-                    <p>id:{uid}</p>
-                    <p>user:{user}</p>
-                    <p>money:{money}</p>
-                </List>
-                </Modal>
-                </WingBlank>
-            }
-            >用户管理</NavBar>
-            <List>
-                    <Item>
-                        <div className="userLists">
-                            <font>操作</font>
-                            <span className="table_item">id</span>
-                            <span className="table_item">user</span>
-                            <font>del</font>
-                        </div>
-                    </Item>
-                {
-                    userList&&userList.map((item,key)=>{
-                        return  <Item key={key}>
+                        <Item>
                             <div className="userLists">
-                                <Icon type='check-circle' style={{marginRight:'.1rem'}} onClick={this.changeUser.bind(this,item.uid,item.user)} ></Icon>
-                                <span className="table_item">{item.uid}</span>
-                                <span className="table_item">{item.user}</span>
-                                <Icon type='cross-circle' onClick={this.del.bind(this,item.uid)}></Icon>
+                                <font>操作</font>
+                                <span className="table_item">id</span>
+                                <span className="table_item">user</span>
+                                <font>del</font>
                             </div>
                         </Item>
-                    })
-                }
-            </List>
+                    {
+                        userList&&userList.map((item,key)=>{
+                            return  <Item key={key}>
+                                <div className="userLists">
+                                    <Icon type='check-circle' style={{marginRight:'.1rem'}} onClick={this.changeUser.bind(this,item.uid,item.user)} ></Icon>
+                                    <span className="table_item">{item.uid}</span>
+                                    <span className="table_item">{item.user}</span>
+                                    <Icon type='cross-circle' onClick={this.del.bind(this,item.uid)}></Icon>
+                                </div>
+                            </Item>
+                        })
+                    }
+                </List>
+                
+            </div>
+        </Scroll>
             
-        </div>
     }
     componentDidMount(){
         this.props.changeRedux(getListAll)

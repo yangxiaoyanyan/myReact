@@ -1,5 +1,5 @@
 import React  from 'react'
-
+import Scroll from 'react-bscroll'
 // import Component from '../../tools/shouldComponent'
 import {connect} from 'react-redux'
 import { DatePicker, List,Picker,InputItem ,Button,WingBlank,Modal} from 'antd-mobile';
@@ -23,53 +23,55 @@ class Submit extends React.Component{
         let {date,money,what,userArr,visible}=this.state
         let {userList}=this.props;
         let seasons=this.getNewUserArr(userList)
-        return <div className="Submit">
-            <WingBlank>
-                <List>
-                    <DatePicker
-                    mode="date"
-                    title="Select Date"
-                    extra="Optional"
-                    value={date}
-                    onChange={Time => {this.setState({ date:Time })}}
+        return <Scroll  click={true}>
+            <div className="Submit">
+                <WingBlank>
+                    <List>
+                        <DatePicker
+                        mode="date"
+                        title="Select Date"
+                        extra="Optional"
+                        value={date}
+                        onChange={Time => {this.setState({ date:Time })}}
+                        >
+                        <List.Item arrow="horizontal">日期</List.Item>
+                        </DatePicker>
+                        <Picker
+                        data={seasons}
+                        title="选择用户"
+                        cascade={false}
+                        extra="请选择(可选)"
+                        value={userArr}
+                        onChange={v => this.setState({ userArr: v })}
+                        onOk={v => this.setState({ userArr: v })}
+                        >
+                        <List.Item arrow="horizontal">姓名</List.Item>
+                        </Picker>
+                        <InputItem placeholder="金额" value={money} onChange={(money)=>{;this.setState({money})}}>金额</InputItem>
+                        <InputItem placeholder="用途" value={what} onChange={(what)=>{;this.setState({what})}}>备注</InputItem>
+                    </List>
+                    <div className="btns" style={{display:'flex',justifyContent:'center',padding:'.3rem 0'}}>
+                        <Button type="primary" inline size="small" style={{ marginRight: '.2rem' }} onClick={()=>{this.setState({visible:true})}}>提交</Button>
+                        <Button type="warning" inline size="small" style={{ marginRight: '.2rem' }} onClick={this.clearBtn.bind(this)}>清空</Button>
+                    </div>
+                    <Modal
+                    visible={visible}
+                    transparent
+                    maskClosable={false}
+                    onClose={()=>{this.setState({visible:false})}}
+                    title="提示"
+                    footer={[{ text: '取消', onPress: () => { console.log('00');this.setState({visible:false})} },{ text: '确定', onPress: this.submitBtn.bind(this)}]}
                     >
-                    <List.Item arrow="horizontal">日期</List.Item>
-                    </DatePicker>
-                    <Picker
-                    data={seasons}
-                    title="选择用户"
-                    cascade={false}
-                    extra="请选择(可选)"
-                    value={userArr}
-                    onChange={v => this.setState({ userArr: v })}
-                    onOk={v => this.setState({ userArr: v })}
-                    >
-                    <List.Item arrow="horizontal">姓名</List.Item>
-                    </Picker>
-                    <InputItem placeholder="金额" value={money} onChange={(money)=>{;this.setState({money})}}>金额</InputItem>
-                    <InputItem placeholder="用途" value={what} onChange={(what)=>{;this.setState({what})}}>备注</InputItem>
-                </List>
-                <div className="btns" style={{display:'flex',justifyContent:'center',padding:'.3rem 0'}}>
-                    <Button type="primary" inline size="small" style={{ marginRight: '.2rem' }} onClick={()=>{this.setState({visible:true})}}>提交</Button>
-                    <Button type="warning" inline size="small" style={{ marginRight: '.2rem' }} onClick={this.clearBtn.bind(this)}>清空</Button>
-                </div>
-                <Modal
-                visible={visible}
-                transparent
-                maskClosable={false}
-                onClose={()=>{this.setState({visible:false})}}
-                title="提示"
-                footer={[{ text: '取消', onPress: () => { console.log('00');this.setState({visible:false})} },{ text: '确定', onPress: this.submitBtn.bind(this)}]}
-                >
-                <div >
-                    <p><span>日期</span>:<span>{this.getDate(date)}</span></p>
-                    <p><span>姓名</span>:<span>{userArr}</span></p>
-                    <p><span>金额</span>:<span>{money}</span></p>
-                    <p><span>备注</span>:<span>{what}</span></p>
-                </div>
-                </Modal>
-            </WingBlank>
-        </div>
+                    <div >
+                        <p><span>日期</span>:<span>{this.getDate(date)}</span></p>
+                        <p><span>姓名</span>:<span>{userArr}</span></p>
+                        <p><span>金额</span>:<span>{money}</span></p>
+                        <p><span>备注</span>:<span>{what}</span></p>
+                    </div>
+                    </Modal>
+                </WingBlank>
+            </div>
+        </Scroll>
     }
     componentDidMount(){
         this.props.changeRedux(getListAll)

@@ -2,7 +2,7 @@ import React  from 'react'
 import {Route,NavLink,Switch} from 'react-router-dom'
 import { NavBar, Icon } from 'antd-mobile';
 import Component from '../../tools/shouldComponent'
-
+//import Scroll  from 'react-bscroll'
 import './index.css'
 class HomePage extends Component{
     render(){

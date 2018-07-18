@@ -2,7 +2,7 @@ import {GET_LIST_ALL,DETAIL_LIST,DELETE_USER,DELETE_USER_SUCCESS,ADD_USER,CHANGE
 let moreId=0;
 
 
-let obj={
+let obj={  
     [ADD_RECORD](state,action){
         let {time,moneyItem,what,user} = action;
         let uid='';
@@ -56,7 +56,7 @@ let obj={
     }
 }
 
-let interactive =(state={allmoney:0,userList:[],moreList:[],detailList:[],detailName:'',deleteSuccess:null,addSuccess:null,changeUserSuccess:null,addRecordSuccess:null,LoadingShow:false},action)=>{
+let interactive =(state={allmoney:0,userList:[],moreList:[],detailList:[],detailName:'请选择一个用户',deleteSuccess:null,addSuccess:null,changeUserSuccess:null,addRecordSuccess:null,LoadingShow:false},action)=>{
     obj[action.type]&&obj[action.type](state,action);
     let userList=state.userList.map(item=>{return {...item}});
     let moreList=state.moreList.map(item=>{return {...item}});
@@ -75,7 +75,8 @@ function addAllMoney(state){
 //给数据添加个人总钱数
 function getUserList(state){
     let {userList,moreList}=state;
-    state.average =state.allmoney/userList.length;
+    let average = state.allmoney/userList.length;
+    state.average=average.toFixed(2)
     state.userList=userList.map(value=>{
         value.payment=0;
         value.receivables=0;
@@ -85,6 +86,7 @@ function getUserList(state){
         },0)
         value.usermoney=usermoney;
         let diff=usermoney-state.average
+        diff=diff.toFixed(2)
         if(diff<0){
             value.payment=-diff
         }else if(diff>0){
