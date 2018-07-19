@@ -1,6 +1,6 @@
 import React  from 'react'
 import Scroll from 'react-bscroll'
-// import Component from '../../tools/shouldComponent'
+import Component from '../../tools/shouldComponent'
 import {connect} from 'react-redux'
 import { DatePicker, List,Picker,InputItem ,Button,WingBlank,Modal} from 'antd-mobile';
 import {getListAll,addRecord,ADD_RECORD_SUCCESS} from '../../store/actions'
@@ -8,7 +8,7 @@ const alert = Modal.alert;
 const nowTimeStamp = Date.now();
 const now = new Date(nowTimeStamp);
 
-class Submit extends React.Component{
+class Submit extends Component{
     constructor(props){
         super(props);
         this.state = {

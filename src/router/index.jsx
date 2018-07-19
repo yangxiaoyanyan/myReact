@@ -1,7 +1,8 @@
-import React ,{Component} from 'react';
+import React from 'react';
 import {BrowserRouter as Router,Route,Redirect,withRouter,Switch} from 'react-router-dom'
 import config from './config'
 import {Loading} from '../tools/LoadingAsyncCom'
+import Component from '../tools/shouldComponent'
 class  RootRouter extends Component{
        render(){
         return <Router>

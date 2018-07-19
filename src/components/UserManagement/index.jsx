@@ -8,7 +8,7 @@ import {getListAll,deleteUser,DELETE_USER_SUCCESS,addUser,CHANGE_ADD_SUCCESS,cha
 let Item = List.Item;
 const alert = Modal.alert;
 const prompt=Modal.prompt;
-class UserManagement extends React.Component{
+class UserManagement extends Component{
     constructor(props){
         super(props);
         this.state={
