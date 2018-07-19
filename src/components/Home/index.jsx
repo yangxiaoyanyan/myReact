@@ -21,7 +21,7 @@ class Home extends Component{
                     <InputItem
                         type="password"
                         placeholder="请输入密码" 
-                        onBlur={this.blur.bind(this)}
+                        onInput={this.input.bind(this)}
                     >密码</InputItem>
                 </List>
                 <p style={{width:'2rem',height:'.8rem',borderRadius:".2rem",background:'#999',margin:'.1rem auto',textAlign:'center',lineHeight:'.8rem'}}>{allmoney}</p>
@@ -55,8 +55,9 @@ class Home extends Component{
             </div>     
         </Scroll>
     }
-    blur(e){
-        if(/*e.keyCode===13&&*/e==='123'){
+    input(e){
+        console.log(e)
+        if(/*e.keyCode===13&&*/e.target.value==='123'){
             console.log('1')
             this.props.history.push('/userManagement')
         }

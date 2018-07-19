@@ -12,7 +12,6 @@ export let LoadAsyncCom=(asyncFn,Loading)=>{
         }
         render(){
             let {Load}=this.state;
-            console.log(this.props)
             return <Load {...this.props}></Load>
         }
         componentDidMount(){
